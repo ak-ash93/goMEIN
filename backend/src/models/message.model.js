@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    reciever_Id: {
+    receiver_Id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -21,6 +21,14 @@ const messageSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Prevent empty messages from being saved
+messageSchema.pre("save", function (next) {
+  if (!this.text && !this.image) {
+    return next(new Error("Message must contain either text or image."));
+  }
+  next();
+});
 
 const Message = mongoose.model("Message", messageSchema);
 
