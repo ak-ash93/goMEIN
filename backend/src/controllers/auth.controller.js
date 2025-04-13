@@ -2,6 +2,7 @@ import generateToken from "../lib/generateToken.js";
 import { hashPassword } from "../lib/hashpassword.js"; // For password hashing
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import cloudinary from "../lib/cloudinary.js";
 
 // Handle user login
 export const login = async (req, res) => {
@@ -137,8 +138,45 @@ export const logout = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-  } catch (error) {}
+    const { profilePic } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const uploadPic = await cloudinary.uploader.upload(profilePic);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { profilePic: uploadPic.secure_url },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+    });
+  } catch (error) {
+    console.log("Error in update controller", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
+export const checkAuth = (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.log("Error in checkAuth controller", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 // Export all controllers as a single object
-export default { login, register, logout, update };
+export default { login, register, logout, update, checkAuth };
