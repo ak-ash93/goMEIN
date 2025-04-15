@@ -1,7 +1,7 @@
 // Importing required models and libraries
-import User from "../models/user.model";
-import Message from "../models/message.model";
-import cloudinary from "../lib/cloudinary";
+import User from "../models/user.model.js";
+import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
 
 // Controller to get all users except the currently logged-in user
 export const getUsers = async (req, res) => {
