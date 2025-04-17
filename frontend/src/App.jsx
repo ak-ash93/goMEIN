@@ -1,30 +1,55 @@
 import React, { useEffect } from "react";
 import NavBar from "./components/NavBar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 import { useAuthStore } from "./store/useAuthStore";
+import { Loader } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { authUser, checkAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
+  if (isCheckAuth && !authUser)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader className="animate-spin size-11" />
+      </div>
+    );
+
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} />
       <NavBar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/"
+          element={authUser ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile"
+          element={authUser ? <Profile /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/login"
+          element={!authUser ? <Login /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/register"
+          element={!authUser ? <Register /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/settings"
+          element={authUser ? <Settings /> : <Navigate to="/login" />}
+        />
       </Routes>
     </div>
   );
