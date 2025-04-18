@@ -26,7 +26,6 @@ const App = () => {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
       <NavBar />
 
       <Routes>
@@ -51,6 +50,7 @@ const App = () => {
           element={authUser ? <Settings /> : <Navigate to="/login" />}
         />
       </Routes>
+      <Toaster />
     </div>
   );
 };

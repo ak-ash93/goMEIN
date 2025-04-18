@@ -12,12 +12,13 @@ import {
   MessageSquare,
   User,
 } from "lucide-react";
+import ImagePattern from "../components/ImagePattern";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { signUp, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
 
   const {
     register,
@@ -29,7 +30,7 @@ const Register = () => {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    signUp(data);
+    signup(data);
     toast.success("Registered successfully");
   };
 
@@ -75,7 +76,7 @@ const Register = () => {
                 />
               </div>
               {errors.fullname && (
-                <p className="text-red-600 opacity-20 text-sm mt-1.5">
+                <p className="text-red-400 opacity-50 text-sm mt-1.5">
                   {errors.fullname.message}
                 </p>
               )}
@@ -107,7 +108,7 @@ const Register = () => {
                 />
               </div>
               {errors.email && (
-                <p className="text-red-600 opacity-20 text-sm mt-1.5">
+                <p className="text-red-400 opacity-50 text-sm mt-1.5">
                   {errors.email.message}
                 </p>
               )}
@@ -142,7 +143,7 @@ const Register = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="size-5 text-base-content/40 text-blue-200 " />
+                    <EyeOff className="size-5  text-blue-200 " />
                   ) : (
                     <Eye className="size-5 text-base-content/40" />
                   )}
@@ -150,7 +151,7 @@ const Register = () => {
               </div>
 
               {errors.password && (
-                <p className="text-red-600 opacity-40 text-sm mt-1.5">
+                <p className="text-red-400 opacity-50 text-sm mt-1.5">
                   {errors.password.message}
                 </p>
               )}
@@ -186,14 +187,14 @@ const Register = () => {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="size-5 text-base-content/40 text-blue-200" />
+                    <EyeOff className="size-5  text-blue-200" />
                   ) : (
                     <Eye className="size-5 text-base-content/40 " />
                   )}
                 </button>
               </div>
               {errors.confirmPassword && (
-                <p className="text-red-600 opacity-40 text-sm mt-1">
+                <p className="text-red-400 opacity-50 text-sm mt-1">
                   {errors.confirmPassword.message}
                 </p>
               )}
@@ -229,6 +230,12 @@ const Register = () => {
           </div>
         </div>
       </div>
+
+      {/* Right container */}
+      <ImagePattern
+        title="Hop in — the community’s waiting for you!"
+        subtitle="Connect, capture, and share — with the people who matter most."
+      />
     </div>
   );
 };
