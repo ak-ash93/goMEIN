@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { LogOut, MessageSquareText, Settings, User } from "lucide-react";
 
 const NavBar = () => {
-  const { authUser, logout } = useAuthStore;
+  const { authUser, logout } = useAuthStore();
 
   return (
     <nav className="bg-base-200 border-b-2 border-base-300 fixed w-full top-0 z-50 backdrop-blur-2xl shadow-lg ">
@@ -25,7 +25,7 @@ const NavBar = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/settings"
-              className="relative group btn btn-xs btn-ghost gap-2 tracking-wider hover:opacity-75"
+              className="relative group btn btn-xs btn-ghost gap-2 tracking-wider hover:opacity-45"
             >
               <Settings className="w-4 h-4" />
               <span className="hidden sm:inline-block text-xs">Settings</span>
@@ -35,9 +35,11 @@ const NavBar = () => {
               <>
                 <Link
                   to={"/profile"}
-                  className={`btn btn-xs btn-ghost gap-2 tracking-wider hover:opacity-75`}
+                  className={`btn btn-xs btn-ghost gap-1.5 tracking-wider hover:opacity-45`}
                 >
-                  <User className="w-4 h-4" />
+                  <div className="size-6 rounded-full border-2">
+                    {authUser.profilePic}
+                  </div>
                   <span className="hidden sm:inline-block text-xs">
                     {authUser.fullname}
                   </span>

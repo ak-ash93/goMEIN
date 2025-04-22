@@ -46,8 +46,8 @@ const Login = () => {
 
         <div className="text-center mb-10">
           <div className="flex flex-col items-center gap-2.5 group">
-            <div className="w-15 h-15 rounded-2xl bg-white group-hover:bg-primary/10 transition-colors">
-              <MessageSquare className="size-5 text-violet-600" />
+            <div className="w-15 h-15 rounded-2xl bg-white group-hover:bg-primary/10 transition-colors flex items-center justify-center">
+              <MessageSquare className="size-10 text-violet-600" />
             </div>
             <h1 className="text-2xl font-light mt-2">
               GoMein-The future of communication{" "}
@@ -64,13 +64,14 @@ const Login = () => {
           {/* Email */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium">Email</span>
+              <span className="label-text font-medium mb-1.5">Email</span>
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="relative w-[20rem] ">
+              <div className="absolute inset-y-0 left-0 z-10 pl-1 flex items-center pointer-events-none">
                 <MailIcon className="size-4 text-gray-500" />
               </div>
               <input
+                className="input input-bordered pl-8"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -91,14 +92,15 @@ const Login = () => {
           <div className="form-control">
             <div className="label">
               <label className="label">
-                <span className="label-text font-medium">Password"</span>
+                <span className="label-text font-medium mb-1.5">Password</span>
               </label>
             </div>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <div className="absolute inset-y-0 left-0 z-10 pl-1 flex items-center pointer-events-none">
                 <Lock className="size-4 text-gray-500" />
               </div>
               <input
+                className="input input-bordered pl-8"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 {...register("password", {
@@ -127,7 +129,7 @@ const Login = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn btn-primary w-full mt-2 "
+            className="btn btn-primary w-full my-2 "
             disabled={isLoggingIn}
           >
             {isLoggingIn ? (
@@ -145,7 +147,7 @@ const Login = () => {
         <div className="text-center mt-3">
           <p className="text-base-content/60">
             Don't have an account?{" "}
-            <Link to="/register" className="link link-primary">
+            <Link to="/register" className="link link-primary ml-1">
               Create an account
             </Link>
           </p>
