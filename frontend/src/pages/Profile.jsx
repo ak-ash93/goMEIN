@@ -41,7 +41,7 @@ const Profile = () => {
               />
               <label
                 htmlFor="avatar-upload"
-                className={` absolute bottom-0 right-0 cursor-pointer hover:scale-150 transition-all duration-300 ${
+                className={` absolute bottom-0 right-0 cursor-pointer  hover:scale-150 transition-all duration-300 ${
                   isUpdatingProfile ? "animate-ping pointer-events-none" : ""
                 } `}
               >

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { connectDb } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
 dotenv.config();
 
 const app = express();
