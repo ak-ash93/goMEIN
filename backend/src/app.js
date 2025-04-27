@@ -5,13 +5,21 @@ import dotenv from "dotenv";
 import { connectDb } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { app, server } from "./lib/socket.js";
+import { initSocket } from "./lib/socket.js";
+import http from "http";
 import path from "path";
 
 dotenv.config();
 
+const app = express();
 const port = process.env.PORT;
 const __dirname = path.resolve();
+
+const server = http.createServer(app);
+
+// initialize socket after creating server
+initSocket(server);
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
@@ -31,6 +39,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
+
 server.listen(port, () => {
   console.log(`Server is running on port:${port}`);
   connectDb();
