@@ -33,4 +33,4 @@ function getReceiverSocketId(userId) {
   return io?.sockets?.adapter?.rooms.get(userId);
 }
 
-export { initSocket, getReceiverSocketId };
+export { initSocket, getReceiverSocketId, io };
