@@ -27,7 +27,7 @@ const Settings = () => {
                 onClick={() => setTheme(item)}
                 className={`group flex flex-col items-center gap-2 p-1.5 w-[100px] rounded-lg transition-colors ${
                   theme === item ? "bg-base-300" : "bg-base-200"
-                } hover:outline-1 hover:outline-blue-400  cursor-pointer`}
+                } hover:outline-1 hover:outline-blue-400 hover:scale-95 hover-cursor- cursor-pointer`}
               >
                 <div
                   className="relative w-full h-full rounded-lg overflow-hidden"
@@ -48,7 +48,7 @@ const Settings = () => {
           </div>
         </div>
         {/* Preview container */}
-        <div className="space-y-8 border-l-2 border-base-600 px-6 ">
+        <div className="space-y-8 lg:border-l-3  border-base-300 px-6 hidden lg:block">
           <div className=" mt-5">
             <h3 className="text-2xl text-center font-semibold text-base-content/80 ">
               See Your Preview

@@ -5,12 +5,13 @@ import dotenv from "dotenv";
 import { connectDb } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { app, server } from "./lib/socket.js";
+import path from "path";
 
 dotenv.config();
 
-const app = express();
 const port = process.env.PORT;
-
+const __dirname = path.resolve();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
@@ -22,9 +23,9 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
-app.use("/api/auth", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port:${port}`);
   connectDb();
 });

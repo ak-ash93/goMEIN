@@ -12,7 +12,7 @@ import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  const { authUser, checkAuth, isCheckAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckAuth, onlineUsers } = useAuthStore();
   const { theme, setTheme } = useThemeStore();
 
   useEffect(() => {
@@ -22,6 +22,8 @@ const App = () => {
   useEffect(() => {
     setTheme(theme);
   }, [theme, setTheme]);
+
+  console.log(onlineUsers);
 
   if (isCheckAuth && !authUser)
     return (

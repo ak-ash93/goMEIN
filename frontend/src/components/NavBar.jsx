@@ -37,9 +37,13 @@ const NavBar = () => {
                   to={"/profile"}
                   className={`btn btn-xs btn-ghost gap-1.5 tracking-wider hover:opacity-45`}
                 >
-                  <div className="size-6 rounded-full border-2 overflow-hidden">
+                  <div className="size-6 rounded-full  overflow-hidden">
                     <img
-                      src={authUser.profilePic}
+                      src={
+                        authUser.profilePic
+                          ? authUser.profilePic
+                          : "/avatar.png"
+                      }
                       alt="profile"
                       className=" w-full h-full object-cover"
                     />

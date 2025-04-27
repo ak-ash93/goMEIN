@@ -2,6 +2,8 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId } from "../lib/socket.js";
+import { io } from "../lib/socket.js";
 
 // Controller to get all users except the currently logged-in user
 export const getUsers = async (req, res) => {
@@ -70,6 +72,11 @@ export const sendMessage = async (req, res) => {
     });
 
     await message.save();
+
+    const recieverSocketId = getReceiverSocketId(reciever_Id);
+    if (recieverSocketId) {
+      io.to(recieverSocketId).emit("newMessage", message);
+    }
 
     // return the message
     res.status(201).json(message);
