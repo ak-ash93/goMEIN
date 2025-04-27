@@ -47,8 +47,6 @@ Deployment: Production-ready, deployed for FREE!
    Edit
    npm install
 
-# or for frontend and backend separately if you have monorepo structure
-
 3. Setup Environment Variables
    Create a .env file in the backend/ directory and add the following:
 
